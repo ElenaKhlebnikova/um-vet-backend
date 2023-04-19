@@ -15,7 +15,7 @@ app.use(express.json())
 // app.use(bodyParser.json());
 
 mongoose.set("strictQuery", false);
-const db = mongoose.connect(process.env.DATABASE).then(() => {
+mongoose.connect('mongodb+srv://elena_khlebnikova:dodaby55kolka5@cluster0.0nqaswc.mongodb.net/um-vet').then(() => {
   savingOnlyNewDateToDB()
 
 console.log('connected to MDB')})
@@ -48,6 +48,7 @@ const getWeek = function(currentDay) {
 });
 
 app.post('/date-new', function requestHandler(req, res) {
+
 
   makeAnAppointment(req.body.id, req.body.date, req.body.hour, req.body.name, req.body.phone, req.body.procedure)
 

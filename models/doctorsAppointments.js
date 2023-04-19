@@ -1,37 +1,6 @@
 import mongoose from "mongoose";
 const Schema = mongoose.Schema
 
-// const doctorsAppointmentsSchema = new mongoose.Schema({
-  
-//     doctor: {
-//         type: String
-//     }, 
-    
-//    appointments: [
-//     {
-       
-//         date: {
-//             type: String
-//         },
-//         appointmentDetails:[{
-    
-//         hour: String, 
-//         name: String,
-//         phone: String,
-//         procedure: String
-//     }]
-    
-// } 
-//     ], 
-
-//     workingHours: {
-//         type: Schema.Types.ObjectId, ref: 'BookingDates'
-//     }
-       
-// }, { collection: 'doctors' }
-// ) 
-
-
 const doctorsAppointmentsSchema = new mongoose.Schema({
   
     doctor: {

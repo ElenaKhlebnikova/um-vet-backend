@@ -27,13 +27,6 @@ getDaysInMonth(month, year, day)
 
 
 
-// This function is called once when creating the first month during the development. Then the dates will be added every day automatically
-// creating days object to store
-
-  
-
-//saving only business days to DB
- 
 
 
 // This function controls what to save to DB
@@ -171,13 +164,8 @@ days.map(item => {
 bookingDate.save()
   })
 }
-}
 
-const doc = new DoctorsAppointments({doctor: "Umka"})
-
-
-
-
+// 2) Getting new dates only 
 const newDates = days.map(item => ({
   date: item.toDateString(),
   day: item.getDay(),
@@ -238,13 +226,18 @@ const newDates = days.map(item => ({
  
  }))
 
+//3) Checking if the doctor already exists in order not to save a new document
+const doc = await DoctorsAppointments.findOne({doctor: "Umka"})
 
-
-
+if(doc) {
  doc.allDates = [...newDates]
-
+} else {
+  const doc = new DoctorsAppointments({doctor: "Umka"})
+}
 
 doc.save()
+}
+
 
 
 
