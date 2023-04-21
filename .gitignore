@@ -1,4 +1,6 @@
 .env
 node_modules
+# .eslintrc.json .prettierrc should not be added to .gitignore as they need to be checked in to Git
+# also it's better to stick to one format either rc file or jsson for config files like that
 .eslintrc.json
 .prettierrc
