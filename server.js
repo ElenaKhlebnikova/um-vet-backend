@@ -15,6 +15,7 @@ mongoose.connect(process.env.DATABASE).then(() => {
     savingOnlyNewDateToDB()
 })
 
+// This could probably work with just `app.use(cors())`
 app.use(
     cors({
         origin: '*',
@@ -22,7 +23,11 @@ app.use(
     })
 )
 
+
+// maybe instead of `/`, you can name this handler like /appointments
+=======
 // Getting all free dates
+
 app.get('/', async (req, res) => {
     const days = await DoctorsAppointments.find({})
     try {
@@ -40,7 +45,16 @@ app.get('/', async (req, res) => {
     }
 })
 
+// This one could also be /appointments but with a method POST
+//  This is usually how we name these routes
+
+// /appointments GET --> get all of them
+// /appointments POST --> create a new one
+// /appointments/:id GET --> get one by ID
+// /appointments/:id PUT --> update one by ID
+=======
 // Sending data to make an appointment
+
 
 app.post('/date-new', function requestHandler(req) {
     makeAnAppointment(
@@ -53,4 +67,5 @@ app.post('/date-new', function requestHandler(req) {
     )
 })
 
+// better to add a console.log saying "Listening on port ----"
 app.listen(process.env.PORT, () => {})

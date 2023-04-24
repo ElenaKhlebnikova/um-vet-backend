@@ -1,3 +1,4 @@
+// better to name the files as doctors-appointments.js for all files in all projects you work on
 import DoctorsAppointments from '../models/doctorsAppointments.js'
 
 const makeAnAppointment = async function (date, hour, name, phone, procedure) {
