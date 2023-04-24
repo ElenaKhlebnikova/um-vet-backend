@@ -29,27 +29,6 @@ const doctorSchema = new mongoose.Schema({
   },
 });
 
-const availabilitySchema = new mongoose.Schema({
-  doctorId: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: 'Doctor',
-    required: true,
-  },
-  dayOfWeek: {
-    type: String,
-    enum: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'],
-    required: true,
-  },
-  startTime: {
-    type: String,
-    required: true,
-  },
-  endTime: {
-    type: String,
-    required: true,
-  },
-});
-
 const appointmentSchema = new mongoose.Schema({
   doctorId: {
     type: mongoose.Schema.Types.ObjectId,
@@ -66,10 +45,6 @@ const appointmentSchema = new mongoose.Schema({
     required: true,
   },
   startTime: {
-    type: String,
-    required: true,
-  },
-  endTime: {
     type: String,
     required: true,
   },
@@ -91,37 +66,14 @@ Here are example objects for the Doctor, Availability, and Appointment models
   "specialization": "Veterinarian"
 }
 
----------- Availability -----------
-[
-  {
-    "_id": "60a7bb2dd5a5b9001555da22",
-    "doctorId": "60a7b9f5d5a5b9001555da21",
-    "dayOfWeek": "Monday",
-    "startTime": "09:00",
-    "endTime": "12:00"
-  },
-  {
-    "_id": "60a7bb2dd5a5b9001555da23",
-    "doctorId": "60a7b9f5d5a5b9001555da21",
-    "dayOfWeek": "Monday",
-    "startTime": "14:00",
-    "endTime": "18:00"
-  },
-  {
-    "_id": "60a7bb2dd5a5b9001555da24",
-    "doctorId": "60a7b9f5d5a5b9001555da21",
-    "dayOfWeek": "Tuesday",
-    "startTime": "09:00",
-    "endTime": "12:00"
-  },
-  {
-    "_id": "60a7bb2dd5a5b9001555da25",
-    "doctorId": "60a7b9f5d5a5b9001555da21",
-    "dayOfWeek": "Tuesday",
-    "startTime": "14:00",
-    "endTime": "18:00"
-  }
-]
+-------- Patient -----------
+{
+  "_id": "60a7b9f5d5a5b9001555da21",
+  "name": "Vika",
+  "email": "vika@example.com",
+  "phone": "555-1234",
+  
+}
 
 ----------- Appointment ------------
 [
@@ -129,9 +81,9 @@ Here are example objects for the Doctor, Availability, and Appointment models
     "_id": "60a7bd5ad5a5b9001555da26",
     "doctorId": "60a7b9f5d5a5b9001555da21",
     "patientId": "607c1ea07e8466001570e7d9",
+    "purpose": "cutting his dick off"
     "date": "2023-04-24",
-    "startTime": "09:30",
-    "endTime": "10:00"
+    "startTime": "09:00",
   },
   {
     "_id": "60a7bd5ad5a5b9001555da27",
@@ -139,7 +91,6 @@ Here are example objects for the Doctor, Availability, and Appointment models
     "patientId": "607c1ea07e8466001570e7da",
     "date": "2023-04-24",
     "startTime": "10:00",
-    "endTime": "10:30"
   }
 ]
 
