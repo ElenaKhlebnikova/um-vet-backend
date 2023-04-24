@@ -23,7 +23,11 @@ app.use(
     })
 )
 
+
 // maybe instead of `/`, you can name this handler like /appointments
+=======
+// Getting all free dates
+
 app.get('/', async (req, res) => {
     const days = await DoctorsAppointments.find({})
     try {
@@ -48,6 +52,10 @@ app.get('/', async (req, res) => {
 // /appointments POST --> create a new one
 // /appointments/:id GET --> get one by ID
 // /appointments/:id PUT --> update one by ID
+=======
+// Sending data to make an appointment
+
+
 app.post('/date-new', function requestHandler(req) {
     makeAnAppointment(
         req.body.id,
