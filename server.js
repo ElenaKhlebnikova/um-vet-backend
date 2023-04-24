@@ -22,6 +22,7 @@ app.use(
     })
 )
 
+// Getting all free dates
 app.get('/', async (req, res) => {
     const days = await DoctorsAppointments.find({})
     try {
@@ -38,6 +39,8 @@ app.get('/', async (req, res) => {
         })
     }
 })
+
+// Sending data to make an appointment
 
 app.post('/date-new', function requestHandler(req) {
     makeAnAppointment(
