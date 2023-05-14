@@ -1,5 +1,3 @@
-import mongoose from 'mongoose'
-
 /*
 The way this model is built, is creating a lot of repetition in your code as far as I can see
 Maybe before moving forward, you can spend some time and see if this could be simplified
@@ -84,14 +82,14 @@ Here are example objects for the Doctor, Availability, and Appointment models
     "purpose": "cutting his dick off"
     "date": "2023-04-24",
     "startTime": "09:00",
-  },
-  {
+  },{
     "_id": "60a7bd5ad5a5b9001555da27",
     "doctorId": "60a7b9f5d5a5b9001555da21",
     "patientId": "607c1ea07e8466001570e7da",
     "date": "2023-04-24",
     "startTime": "10:00",
   }
+  
 ]
 
 These example objects demonstrate how the data is structured with the separated schemas. 
@@ -212,80 +210,3 @@ const appointments = await Appointment.find({
 
     await newAppointment.save();
 */
-
-const doctorsAppointmentsSchema = new mongoose.Schema(
-    {
-        doctor: {
-            type: String,
-        },
-
-        allDates: [
-            {
-                date: { type: String },
-                day: { type: Number },
-
-                h9: {
-                    available: Boolean,
-                    name: String,
-                    phone: String,
-                    procedure: String,
-                },
-                h10: {
-                    available: Boolean,
-                    name: String,
-                    phone: String,
-                    procedure: String,
-                },
-                h11: {
-                    available: Boolean,
-                    name: String,
-                    phone: String,
-                    procedure: String,
-                },
-                h12: {
-                    available: Boolean,
-                    name: String,
-                    phone: String,
-                    procedure: String,
-                },
-                h13: {
-                    available: Boolean,
-                    name: String,
-                    phone: String,
-                    procedure: String,
-                },
-                h14: {
-                    available: Boolean,
-                    name: String,
-                    phone: String,
-                    procedure: String,
-                },
-                h15: {
-                    available: Boolean,
-                    name: String,
-                    phone: String,
-                    procedure: String,
-                },
-                h16: {
-                    available: Boolean,
-                    name: String,
-                    phone: String,
-                    procedure: String,
-                },
-                h17: {
-                    available: Boolean,
-                    name: String,
-                    phone: String,
-                    procedure: String,
-                },
-            },
-        ],
-    },
-    { collection: 'doctors' }
-)
-
-const DoctorsAppointments = new mongoose.model(
-    'DoctorsAppointments',
-    doctorsAppointmentsSchema
-)
-export default DoctorsAppointments
