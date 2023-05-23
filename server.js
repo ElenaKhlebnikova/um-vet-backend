@@ -1,15 +1,19 @@
 import mongoose from 'mongoose'
 import {
-    findAppointments,
+    findAppointmentsByDoctor,
     makeAnAppointment,
 } from './controllers/booking-controller.js'
 
 import {
     getAllComments,
     getDoctors,
+    getOneDoctor,
     createNewComment,
 } from './controllers/doctor-controller.js'
-import getAllBlogPosts from './controllers/blogpost-controller.js'
+import {
+    getAllBlogPosts,
+    getOneBlogPost,
+} from './controllers/blogpost-controller.js'
 import express from 'express'
 import cors from 'cors'
 import * as dotenv from 'dotenv'
@@ -34,11 +38,14 @@ app.use(express.json())
 // Getting all free dates
 
 app.post('/comments', createNewComment)
-app.get('/comments', getAllComments)
-app.get('/appointments', findAppointments)
+app.get('/comments/:doctorId', getAllComments)
+app.get('/appointments/:doctorId', findAppointmentsByDoctor)
 app.get('/blog', getAllBlogPosts)
+app.get('/blog/:postId', getOneBlogPost)
 app.post('/appointments', makeAnAppointment)
+
 app.get('/doctors', getDoctors)
+app.get('/doctors/:doctorId', getOneDoctor)
 
 app.get('/service-and-prices', async (req, res) => {
     const service = await serviceAndPriceSchema.find({})

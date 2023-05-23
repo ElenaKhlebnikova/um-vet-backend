@@ -1,11 +1,12 @@
 // better to name the files as doctors-appointments.js for all files in all projects you work on
 import Appointments from '../models/appointment-schema.js'
 
-const findAppointments = async function (req, res) {
+const findAppointmentsByDoctor = async function (req, res) {
+    console.log(req.params.doctorId)
     try {
         // finding a doctor
         const doctorsAppointments = await Appointments.find({
-            doctorId: req.query.doctorId,
+            doctorId: req.params.doctorId,
         })
         // sending back doctor's appointments
 
@@ -43,6 +44,7 @@ const makeAnAppointment = async function (req, res) {
             },
         })
     } catch (err) {
+        console.log(err)
         res.status(400).json({
             status: 'fail',
             data: {
@@ -52,4 +54,4 @@ const makeAnAppointment = async function (req, res) {
     }
 }
 
-export { findAppointments, makeAnAppointment }
+export { findAppointmentsByDoctor, makeAnAppointment }

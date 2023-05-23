@@ -2,7 +2,7 @@ import blogPostSchema from '../models/blog-schema.js'
 
 const getAllBlogPosts = async function (req, res) {
     try {
-        const posts = await blogPostSchema.find({})
+        const posts = await blogPostSchema.find({}).select('-content')
 
         res.status(200).json({
             status: 'success',
@@ -11,11 +11,29 @@ const getAllBlogPosts = async function (req, res) {
             },
         })
     } catch (err) {
-        res.status(400).json({
+        res.status(err.code).json({
             status: 'fail',
             message: err,
         })
     }
 }
 
-export default getAllBlogPosts
+const getOneBlogPost = async (req, res) => {
+    try {
+        const posts = await blogPostSchema.find({
+            _id: req.params.postId,
+        })
+        res.status(200).json({
+            status: 'success',
+            data: {
+                posts,
+            },
+        })
+    } catch (err) {
+        res.status(err.code).json({
+            status: 'fail',
+            message: err,
+        })
+    }
+}
+export { getOneBlogPost, getAllBlogPosts }

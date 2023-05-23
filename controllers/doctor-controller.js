@@ -6,7 +6,7 @@ const getAllComments = async function (req, res) {
     try {
         // finding a comment section by passing  doctor's id
         const comments = await commentsSchema.find({
-            doctorId: req.query.doctorId,
+            doctorId: req.params.doctorId,
         })
 
         // sending back comments on the doctor
@@ -26,9 +26,30 @@ const getAllComments = async function (req, res) {
     }
 }
 
-const getDoctors = async function (req, res) {
+const getOneDoctor = async (req, res) => {
+    const doctors = await doctorsSchema.find({
+        _id: req.params.doctorId,
+    })
     try {
-        const doctors = await doctorsSchema.find({})
+        res.status(200).json({
+            status: 'success',
+            data: {
+                doctors,
+            },
+        })
+    } catch (err) {
+        res.status(err.status).json({
+            status: 'fail',
+            message: err,
+        })
+    }
+}
+const getDoctors = async function (req, res) {
+    const doctors = await doctorsSchema
+        .find({})
+        .select('-education')
+        .select('-about')
+    try {
         res.status(200).json({
             status: 'success',
             data: {
@@ -45,7 +66,6 @@ const getDoctors = async function (req, res) {
 }
 
 const createNewComment = async function (req, res) {
-    console.log(req)
     try {
         const doc = await new commentsSchema({
             doctorId: new ObjectId(req.body.doctorId),
@@ -55,6 +75,7 @@ const createNewComment = async function (req, res) {
             createdAt: req.body.date,
         })
         await doc.save()
+
         res.status(200).json({
             status: 'success',
             data: {
@@ -71,4 +92,4 @@ const createNewComment = async function (req, res) {
     }
 }
 
-export { createNewComment, getAllComments, getDoctors }
+export { createNewComment, getAllComments, getDoctors, getOneDoctor }
