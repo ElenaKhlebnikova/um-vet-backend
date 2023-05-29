@@ -1,95 +1,43 @@
-import { ObjectId } from 'mongodb'
-import commentsSchema from '../models/comments-schema.js'
 import doctorsSchema from '../models/doctor-schema.js'
-
-const getAllComments = async function (req, res) {
-    try {
-        // finding a comment section by passing  doctor's id
-        const comments = await commentsSchema.find({
-            doctorId: req.params.doctorId,
-        })
-
-        // sending back comments on the doctor
-
-        res.status(200).json({
-            status: 'success',
-            data: {
-                comments,
-            },
-        })
-    } catch (err) {
-        console.log(err)
-        res.status(400).json({
-            status: 'fail',
-            message: err,
-        })
-    }
-}
+import deDoctorsSchema from '../models/de-doctor-schema.js'
+import tryCatchFn from '../utils/index.js'
 
 const getOneDoctor = async (req, res) => {
-    const doctors = await doctorsSchema.find({
-        _id: req.params.doctorId,
-    })
-    try {
-        res.status(200).json({
-            status: 'success',
-            data: {
-                doctors,
-            },
-        })
-    } catch (err) {
-        res.status(err.status).json({
-            status: 'fail',
-            message: err,
-        })
+    const get = async () => {
+        if (req.query.lang === 'en') {
+            const doctors = await doctorsSchema.find({
+                _id: req.params.doctorId,
+            })
+            return doctors
+        }
+        if (req.query.lang === 'de') {
+            const doctors = await deDoctorsSchema.find({
+                _id: req.params.doctorId,
+            })
+            return doctors
+        }
     }
+
+    tryCatchFn(get, res)
 }
 const getDoctors = async function (req, res) {
-    const doctors = await doctorsSchema
-        .find({})
-        .select('-education')
-        .select('-about')
-    try {
-        res.status(200).json({
-            status: 'success',
-            data: {
-                doctors,
-            },
-        })
-    } catch (err) {
-        console.log(err)
-        res.status(400).json({
-            status: 'fail',
-            message: err,
-        })
+    const get = async () => {
+        if (req.query.lang === 'en') {
+            const doctors = await doctorsSchema
+                .find({})
+                .select('-education')
+                .select('-about')
+            return doctors
+        }
+        if (req.query.lang === 'de') {
+            const doctors = await deDoctorsSchema
+                .find({})
+                .select('-education')
+                .select('-about')
+            return doctors
+        }
     }
+    tryCatchFn(get, res)
 }
 
-const createNewComment = async function (req, res) {
-    try {
-        const doc = await new commentsSchema({
-            doctorId: new ObjectId(req.body.doctorId),
-            name: req.body.name,
-            comment: req.body.comment,
-            rating: req.body.rating,
-            createdAt: req.body.date,
-        })
-        await doc.save()
-
-        res.status(200).json({
-            status: 'success',
-            data: {
-                message: 'Thank you for your feedback!',
-            },
-        })
-    } catch (err) {
-        res.status(400).json({
-            status: 'fail',
-            data: {
-                err,
-            },
-        })
-    }
-}
-
-export { createNewComment, getAllComments, getDoctors, getOneDoctor }
+export { getDoctors, getOneDoctor }

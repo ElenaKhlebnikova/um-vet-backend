@@ -1,39 +1,41 @@
 import blogPostSchema from '../models/blog-schema.js'
+import deBlogPostSchema from '../models/de-blog-schema.js'
+import tryCatchFn from '../utils/index.js'
 
 const getAllBlogPosts = async function (req, res) {
-    try {
-        const posts = await blogPostSchema.find({}).select('-content')
-
-        res.status(200).json({
-            status: 'success',
-            data: {
-                posts,
-            },
-        })
-    } catch (err) {
-        res.status(err.code).json({
-            status: 'fail',
-            message: err,
-        })
+    const get = async () => {
+        if (req.query.lang === 'en') {
+            const posts = await blogPostSchema.find({}).select('-content')
+            return posts
+        }
+        if (req.query.lang === 'de') {
+            const posts = await deBlogPostSchema.find({}).select('-content')
+            return posts
+        }
     }
+
+    tryCatchFn(get, res)
 }
 
 const getOneBlogPost = async (req, res) => {
-    try {
-        const posts = await blogPostSchema.find({
-            _id: req.params.postId,
-        })
-        res.status(200).json({
-            status: 'success',
-            data: {
-                posts,
-            },
-        })
-    } catch (err) {
-        res.status(err.code).json({
-            status: 'fail',
-            message: err,
-        })
+    const get = async () => {
+        if (req.query.lang === 'en') {
+            const posts = await blogPostSchema.find({
+                _id: req.params.postId,
+            })
+
+            return posts
+        }
+        if (req.query.lang === 'de') {
+            const posts = await deBlogPostSchema.find({
+                _id: req.params.postId,
+            })
+
+            return posts
+        }
     }
+
+    tryCatchFn(get, res)
 }
+
 export { getOneBlogPost, getAllBlogPosts }
