@@ -21,17 +21,17 @@ UmVet backend is built with the following tech stack:
 
 ## 👀 Project Overview
 
-Click  [here](https://nodejs-production-ee89.up.railway.app/) to view the API.
+Click  [here](https://nodejs-production-ee89.up.railway.app/doctors?lang=en) to view the API.
 
 
 ### Routes
 
-*possible lang variants are 'en' and 'de'
+possible lang variants are `en` and `de`
 | Route  | Description   | Example  |
 |---|---|---|
-| GET "/blog?lang=en"   | returns blog posts (in english if land=en and in German if lang=de |  [view Example](https://nodejs-production-ee89.up.railway.app/blog?lang=en) |  
-| GET "/blog:postId?lang=en"   | returns one blog posts (in english if land=en and in German if lang=de |  [view Example](https://nodejs-production-ee89.up.railway.app/blog/6460de73e26914f09abb42e2?lang=en) |  
-GET "/appointments/:doctorId"  |  returns list appointments that have been booked with the doctor |  [view Example](https://nodejs-production-ee89.up.railway.app/appointments/64466a35b6d3c5e48ed2d191) |
+| GET "/blog?lang=en"   | returns blog posts |  [view Example](https://nodejs-production-ee89.up.railway.app/blog?lang=en) |  
+| GET "/blog:postId?lang=en"   | returns one blog post |  [view Example](https://nodejs-production-ee89.up.railway.app/blog/6460de73e26914f09abb42e2?lang=en) |  
+GET "/appointments/:doctorId"  |  returns a list of appointments that have been booked with the doctor |  [view Example](https://nodejs-production-ee89.up.railway.app/appointments/64466a35b6d3c5e48ed2d191) |
 POST "/appointments"  |  route that is used to make an appointment. It takes following parameners: doctorId, name, phone, procedure, date, startTime |  [view Example](https://ibb.co/7zNsyX3) |
 POST "/comments"  |  route that is used to create a review. It takes following parameners: doctorId, name, comment, rating, createdAt |  [view Example](https://ibb.co/TM4jVRx) |
 GET "/doctors?lang=en"  |  returns a list of doctors  | [view Example](https://nodejs-production-ee89.up.railway.app/doctors?lang=en)  | 
@@ -52,17 +52,19 @@ GET "/service-and-prices?lang=en"   |  returns a list of services and prices  | 
 
 ## 👩‍⚕️ Features 
 
-1.  Storing appointments and comments in the MongoDB.
-2.  Ability to choose languages.
+1.  Creating and fetching appointments and comments by preferred language.
+2.  Fetching static blogs  by preferred language.
+
+   
 
 
 
 ## 📖What I have learnt
 1. Using Node.js and Express to create a backend API.
 2. How to handle request on the backend and store it in DB.
-3. How to use .env.
+3. How to work with env variables locally (.env files) and on deployment platform (Railway, Render)
 4. How to build simple models  for blogposts, comments, and doctors.
 5. How to integrate MongoDB with an Express API using Mongoose ORM.
-6. How to deploy to Netlify, Render and Railway.
-7. How to use Postman to send requests to the API.
+6. How to deploy to Render and Railway.
+7. How to use Postman to locally test APIs during development.
 
