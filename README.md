@@ -52,16 +52,17 @@ GET "/service-and-prices?lang=en"   |  returns a list of services and prices  | 
 
 ## 👩‍⚕️ Features 
 
-1.  Storing appointments and comments in the MongoDB
-2.  Ability to choose languages
+1.  Storing appointments and comments in the MongoDB.
+2.  Ability to choose languages.
 
 
 
 ## 📖What I have learnt
-1. Using Node.js and Express to create a backend API
-2. How to handle request on the backend and store it in DB
-3. How to use .env
-4. How to build simple models  for blogposts, comments, and doctors
+1. Using Node.js and Express to create a backend API.
+2. How to handle request on the backend and store it in DB.
+3. How to use .env.
+4. How to build simple models  for blogposts, comments, and doctors.
 5. How to integrate MongoDB with an Express API using Mongoose ORM.
 6. How to deploy to Netlify, Render and Railway.
+7. How to use Postman to send requests to the API.
 
